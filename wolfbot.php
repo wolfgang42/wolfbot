@@ -4,7 +4,7 @@ header('Content-Type: text/plain');
 
 require_once("errors.php");
 // TODO log exceptions for emailing
-$username="BeepBot";
+$username="WolfBot";
 require('password.php'); # This file declares a variable $password, so the password isn't uploaded to git
 
 require_once('lib/botclasses.php');

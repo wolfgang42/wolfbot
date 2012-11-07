@@ -33,7 +33,7 @@ if ($csv === FALSE) {
 	));
 	$graph->Values(array($approve, $undecided, $disapprove));
 	$graph->colours = array('green','yellow','red');
-	file_put_contents('/tmp/gallup.svg',$graph->Fetch('StackedLineGraph'));
+	file_put_contents('gallup.svg',$graph->Fetch('StackedLineGraph'));
 	$wikipedia->upload('Barack Obama\'s Presidential Job Approval Ratings, 2009-2012 (Gallup Poll).svg','/tmp/gallup.svg','Automated update by bot');
 }
 
