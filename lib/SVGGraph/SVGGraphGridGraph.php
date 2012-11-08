@@ -768,6 +768,7 @@ abstract class GridGraph extends Graph {
     $font_adjust = $this->axis_font_adjust;
     $p = 0;
     foreach($points as $label => $x) {
+      $label=intval(preg_replace("/,/","",$label)); // XXX {{EDIT}} wf because the labels were going haywire.
       $key = $this->flip_axes ? $label : $this->GetKey($label);
 
       // don't draw 0 over the axis line
