@@ -13,7 +13,6 @@ $wikipedia->login($username,$password);
 
 $activeTasks = array( 
 	'gallupgraph'
-	//'sourceupload'
 );
 
 foreach ($activeTasks as $task) {
