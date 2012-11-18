@@ -1,2 +1,3 @@
 password.php
-gallup.svg
+*.svg
+*.serialize
