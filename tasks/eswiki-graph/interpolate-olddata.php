@@ -1,6 +1,7 @@
 <?php
 // Using the data from the chart at http://en.wikipedia.org/wiki/Enciclopedia_Libre_Universal_en_Espa%C3%B1ol,
 // produces a week-by-week (estimated) count of the number of articles, using linear interpolation.
+// This should only be run once, to generate first-run data for the bot
 
 $eswikiData=array();
 $libreData=array();
@@ -56,8 +57,8 @@ foreach (explode("\n",
 as $line) {
 	$array=explode("\t",$line);
 	$thisWeek=round(strtotime($array[0])/(60*60*24*7));
-	$thisEswiki=$array[1];
-	$thisLibre=$array[2];
+	$thisLibre=$array[1];
+	$thisEswiki=$array[2];
 	// Interpolate data between last week and this week
 	if ($lastWeek !== false) {
 		for ($prevWeek = $lastWeek+1; $prevWeek < $thisWeek; $prevWeek++) {
