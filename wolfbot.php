@@ -11,6 +11,9 @@ require_once('lib/botclasses.php');
 $wikipedia=new wikipedia(); // TODO set user-agent
 $wikipedia->login($username,$password);
 
+// Check global shutoff
+if (!$wikipedia->nobots('User:WolfBot/Global Shutoff','WolfBot')) die ('Global shutoff activated!');
+
 $activeTasks = array( 
 	'gallupgraph'
 );
@@ -18,6 +21,10 @@ $activeTasks = array(
 foreach ($activeTasks as $task) {
 	// TODO allow shutoff by checking with user page
 	// TODO anacron
+	if (!$wikipedia->nobots("User:WolfBot/shutoff/$task",'WolfBot')) {
+		echo "\"$task\" shutoff activated!\n";
+		continue;
+	}
 	try {
 		doTask($task);
 	} catch (ErrorException $e) {
