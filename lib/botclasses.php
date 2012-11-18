@@ -160,7 +160,7 @@ class http {
 
     function __destruct () {
         curl_close($this->ch);
-        @unlink('/tmp/cluewikibot.cookies.'.$this->uid.'.dat');
+        if (file_exists('/tmp/cluewikibot.cookies.'.$this->uid.'.dat')) @unlink('/tmp/cluewikibot.cookies.'.$this->uid.'.dat');
     }
 }
 
