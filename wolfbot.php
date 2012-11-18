@@ -16,9 +16,8 @@ if (!$wikipedia->nobots('User:WolfBot/Global Shutoff','WolfBot')) die ('Global s
 
 $activeTasks = array( 
 	//'gallupgraph'
-	
 	//'stub-apply-template'
-	//'stub-uncat-reminder'
+	'stub-uncat-reminder'
 );
 
 foreach ($activeTasks as $task) {
