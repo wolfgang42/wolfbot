@@ -208,7 +208,7 @@ class wikipedia {
             $ret = $this->http->get($this->url.$query);
         else
             $ret = $this->http->post($this->url.$query,$post);
-        var_dump(unserialize($ret));
+        //var_dump(unserialize($ret));
         return unserialize($ret);
     }
 
@@ -241,7 +241,11 @@ class wikipedia {
     function getpageid ($page) {
         $x = $this->query('?action=query&format=php&prop=revisions&titles='.urlencode($page).'&rvlimit=1&rvprop=content');
         foreach ($x['query']['pages'] as $ret) {
-            return $ret['pageid'];
+            if (isset($ret['pageid'])) {
+            	return $ret['pageid'];
+            } else {
+            	return false;
+            }
         }
     }
 
