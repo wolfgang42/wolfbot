@@ -15,7 +15,8 @@ $wikipedia->login($username,$password);
 if (!$wikipedia->nobots('User:WolfBot/Global Shutoff','WolfBot')) die ('Global shutoff activated!');
 
 $activeTasks = array( 
-	'gallupgraph'
+	//'gallupgraph'
+	'eswiki-graph'
 );
 
 foreach ($activeTasks as $task) {
