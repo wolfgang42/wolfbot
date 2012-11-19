@@ -15,8 +15,8 @@ $wikipedia->quiet=true;
 // Check global shutoff
 if (!$wikipedia->nobots('User:WolfBot/Global Shutoff','WolfBot')) die ('Global shutoff activated!');
 
-$activeTasks = array( 
-	//'gallupgraph'
+$activeTasks = array(
+	'gallupgraph',
 	'eswiki-graph'
 );
 
