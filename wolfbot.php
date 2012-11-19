@@ -9,8 +9,8 @@ require('password.php'); # This file declares a variable $password, so the passw
 
 require_once('lib/botclasses.php');
 $wikipedia=new wikipedia(); // TODO set user-agent
-$wikipedia->login($username,$password);
 $wikipedia->quiet=true;
+$wikipedia->login($username,$password);
 
 // Check global shutoff
 if (!$wikipedia->nobots('User:WolfBot/Global Shutoff','WolfBot')) die ('Global shutoff activated!');
