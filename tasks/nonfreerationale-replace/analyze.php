@@ -10,7 +10,9 @@ foreach ($checkedPages->getData() as $page=>$revinfo) {
 		$users[$revinfo[0]]=1;
 	}
 	$dates[]=$revinfo[1];
+	echo "* [[:$page]]\n";
 }
+die();
 
 function ucmp($one,$two) {
 	$a = $one[1];
