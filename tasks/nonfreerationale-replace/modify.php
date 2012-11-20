@@ -8,6 +8,10 @@ $changedPages=new SerialStoreArray('nonfreerationale-replace','changedPages',arr
 $i=0;
 foreach ($checkedPages->getData() as $page => $changeInfo) {
 	if (isset($changedPages->$page)) continue; # already did this one
+	if (($i % 6)==0 && !$wikipedia->nobots("User:WolfBot/shutoff/nonfreerationale-replace",'WolfBot') { // 6 edits = ~1 minute
+		echo "E-Stop activated!";
+		return;
+	}
 	$i++;
 	echo "* $i ";
 	if ($i > 50) {echo "Reached 50 edits!"; return;} // Approved for 50 edits only
