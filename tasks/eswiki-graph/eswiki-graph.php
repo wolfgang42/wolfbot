@@ -16,8 +16,8 @@ unset($resp);
 # TODO some sort of a shared library between this file and interpolate-olddata.php ?
 $thisWeek = round(time()/(60*60*24*7));
 $lastWeek = round(strtotime(array_pop(array_keys($libreData)))/(60*60*24*7));
-$lastEswiki=array_pop(array_keys($eswikiData));
-$lastLibre=array_pop(array_keys($libreData));
+$lastEswiki=array_pop(array_values($eswikiData));
+$lastLibre=array_pop(array_values($libreData));
 for ($prevWeek = $lastWeek+1; $prevWeek < $thisWeek; $prevWeek++) {
 	$prevEswiki=interpolate($prevWeek,$lastWeek,$lastEswiki,$thisWeek,$thisEswiki);
 	$prevLibre=interpolate($prevWeek,$lastWeek,$lastLibre,$thisWeek,$thisLibre);
