@@ -211,6 +211,19 @@ class wikipedia {
         //var_dump(unserialize($ret));
         return unserialize($ret);
     }
+    
+    /**
+     * Gets the statistics for this wiki
+     * @param $statistic The statistic to get
+     */
+    function statistics($statistic=null) {
+    	$resp=$this->query('?action=query&meta=siteinfo&siprop=statistics&format=php');
+    	if ($statistic == null) { // Return all statistics
+    		return $resp['query']['statistics'];
+    	} else { // Just the requested one
+    		return $resp['query']['statistics'][$statistic];
+    	}
+    }
 
     /**
      * Gets the content of a page. Returns false on error.
