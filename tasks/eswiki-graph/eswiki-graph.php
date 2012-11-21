@@ -6,6 +6,7 @@ class EswikiGraph extends Task {
 		return "eswiki-graph";
 	}
 	function run(WolfBot $wolfbot) {
+		$wolfbot->checkShutoff('eswiki-graph');
 		# TODO use the array serializer class
 		list($this->eswikiData,$this->libreData)=unserialize(file_get_contents(dirname(__FILE__)."/entrycount.serialize"));
 
