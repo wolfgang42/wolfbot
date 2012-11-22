@@ -29,17 +29,17 @@ class WolfBot {
 		if ($username != null && $password != null) $wikis[$url]->login($username,$password);
 		return $wikis[$url];
 	}
-	public function runTask(Task $task) {
+	public function checkShutoff($taskName) {
 		$wikipedia=$this->getWiki('en.wikipedia.org');
+		// Check global shutoff
+		if (!$wikipedia->nobots('User:'.BOT_USERNAME.'/Global Shutoff',BOT_USERNAME)) die ('Global shutoff activated!');
+
+		if (!$wikipedia->nobots("User:".BOT_USERNAME."/shutoff/".$taskName,BOT_USERNAME)) {
+			throw new Exception("\"".$taskName."\" shutoff activated!\n");
+		}
+	}
+	public function runTask(Task $task) {
 		try {
-			// TODO anacron
-			// Check global shutoff
-			if (!$wikipedia->nobots('User:'.BOT_USERNAME.'/Global Shutoff',BOT_USERNAME)) die ('Global shutoff activated!');
-
-			if (!$wikipedia->nobots("User:".BOT_USERNAME."/shutoff/".(string)$task,BOT_USERNAME)) {
-				throw new Exception("\"".(string)$task."\" shutoff activated!\n");
-			}
-
 			$task->run($this);
 		} catch (Exception $e) {
 			// TODO log

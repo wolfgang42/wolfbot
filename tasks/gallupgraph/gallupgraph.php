@@ -6,6 +6,7 @@ class GallupGraph extends Task {
 		return "gallupgraph";
 	}
 	function run(WolfBot $wolfbot) {
+		$wolfbot->checkShutoff('gallupgraph');
 		$csv = fopen('http://www.gallup.com/viz/v1/csv/8386b935-9a6b-4a07-ae74-78e02ac52871/POLLFLEXCHARTVIZ/OBAMAJOBAPPR113980.aspx','r');
 		if ($csv === FALSE) {
 			die ("ERROR opening stream: fail!");

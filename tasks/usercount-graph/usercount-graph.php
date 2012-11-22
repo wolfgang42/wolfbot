@@ -6,6 +6,7 @@ class UsercountGraph extends Task {
 		return "usercount-graph";
 	}
 	function run(WolfBot $wolfbot) {
+		$wolfbot->checkShutoff('usercount-graph');
 		$userCount=array();
 		foreach(array(
 				// TODO it's called es-nl, but it has a lot more than that

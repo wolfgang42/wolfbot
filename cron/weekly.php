@@ -1,6 +1,5 @@
 <?php
-header('Content-Type: text/plain');
-
+chdir(dirname(__FILE__)."/..");
 foreach (array(
 	'gallupgraph',
 	'eswiki-graph'
