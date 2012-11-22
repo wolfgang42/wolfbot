@@ -1,5 +1,4 @@
 <?php
-if (!defined('BOT_VERS')) die("Cannot use error handler alone.");
 // Try to catch as many errors as possible
 function error_throw_exception($errno, $errstr, $errfile, $errline ) {
     throw new ErrorException($errstr, 0, $errno, $errfile, $errline);

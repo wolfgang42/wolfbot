@@ -1,5 +1,5 @@
 <?php
-require(dirname(__FILE__).'/../../SerialStoreArray.php');
+require(dirname(__FILE__).'/../../includes/SerialStoreArray.php');
 $checkedPages=new SerialStoreArray('nonfreerationale-replace','checkedPages',array());
 $users=array();
 $dates=array();
