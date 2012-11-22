@@ -39,7 +39,7 @@ class GallupGraph extends Task {
 			$graph->Values(array($approve, $undecided, $disapprove));
 			$graph->colours = array('green','yellow','red');
 			file_put_contents('gallup.svg',$graph->Fetch('StackedLineGraph'));
-			$wolfbot->getWiki('en.wikipedia.org');//->upload('Barack Obama\'s Presidential Job Approval Ratings, 2009-2012 (Gallup Poll).svg','gallup.svg','Automated update by bot');
+			$wolfbot->getWiki('en.wikipedia.org')->upload('Barack Obama\'s Presidential Job Approval Ratings, 2009-2012 (Gallup Poll).svg','gallup.svg','Automated update by bot');
 		}
 	}
 	protected function midrange($range) {

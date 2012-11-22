@@ -38,7 +38,7 @@ class EswikiGraph extends Task {
 		$graph->Values(array($this->libreData,$this->eswikiData));
 		$graph->colours = array('blue','red');
 		file_put_contents('eswiki.svg',$graph->Fetch('MultiLineGraph'));
-		#$wolfbot->getWiki('en.wikipedia.org')->upload('Enciclopedia Libre and Spanish Wikipedia article count.svg','eswiki.svg','Automated update by bot');
+		$wolfbot->getWiki('en.wikipedia.org')->upload('Enciclopedia Libre and Spanish Wikipedia article count.svg','eswiki.svg','Automated update by bot');
 	}
 	protected function addData($week,$eswiki,$libre) {
 		$date=date("d M Y",$week*60*60*24*7);
