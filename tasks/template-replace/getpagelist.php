@@ -1,15 +1,16 @@
 <?php
 # This is a one-time-run task.
 require_once(dirname(__FILE__)."/../../includes/task.php");
-require('SerialStoreArray.php');
+require_once('includes/SerialStoreArray.php');
 class TemplateReplaceGetPageList extends Task {
 	function __toString() {
 		return "template-replace/GetPageList";
 	}
 	function run(WolfBot $wolfbot) {
+		require(dirname(__FILE__)."/control.php");
 		$wikipedia=$wolfbot->getWiki('en.wikipedia.org');
-		$checkedPages=new SerialStoreArray('nonfreerationale-replace','checkedPages',array());
-		$embedList=$wikipedia->query('?action=query&list=embeddedin&eititle=Template:Non-free_media_rationale&eilimit=max&format=php');
+		$checkedPages=new SerialStoreArray('template-replace',$replaceInfo['name'].'.checkedPages',array());
+		$embedList=$wikipedia->query('?action=query&list=embeddedin&eititle='.urlencode($replaceInfo['template']).'&eilimit=max&format=php');
 		$firstLoop=true;$i=0;
 		while ($firstLoop||isset($embedList['query-continue']['embeddedin']['eicontinue'])) {
 		$firstLoop=false;
@@ -35,19 +36,21 @@ class TemplateReplaceGetPageList extends Task {
 				$resp=array_pop($resp);
 				$theRevision=false;
 				foreach ($resp['revisions'] as $revNo=>$revision) {
-					if (preg_match('/\{\{[Nn]on-free media rationale/',$revision['*'])) {
+					if (!isset($revision['*'])) continue; // Revision was hidden
+					if (preg_match($replaceInfo['regex'],$revision['*'],$reMatch)) {
 						$theRevision=$revision;
 					} else {
 						break;
 					}
 				}
+				unset($revision);
 				if ($theRevision === false) {echo "WARN: can't find template in \"$title\"\n";continue;}
-				$checkedPages->$title=array($revision['user'],$revision['timestamp']);
-				echo $revision['user']."\t".$revision['timestamp']."\n";
+				$checkedPages->$title=array($theRevision['user'],$theRevision['timestamp']);
+				echo $theRevision['user']."\t".$theRevision['timestamp']."\n";
 			}
 			echo "*** Continuing...\n";
 			if (isset($embedList['query-continue']['embeddedin']['eicontinue'])) $embedList=$wikipedia->query('?action=query&list=embeddedin&eicontinue='.$embedList['query-continue']['embeddedin']['eicontinue'].'&eilimit=max&format=php');
 		}
 	}
 }
-$wolfbot->runTask(new 
+$wolfbot->runTask(new TemplateReplaceGetPageList());
