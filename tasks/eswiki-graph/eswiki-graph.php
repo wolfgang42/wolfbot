@@ -25,7 +25,10 @@ class EswikiGraph extends Task {
 			$this->addData($prevWeek,$prevEswiki,$prevLibre);
 		}
 		file_put_contents(dirname(__FILE__)."/entrycount.serialize",serialize(array($this->eswikiData,$this->libreData)));
+<<<<<<< Updated upstream
+=======
 
+>>>>>>> Stashed changes
 		require_once 'lib/SVGGraph/SVGGraph.php';
 		$graph = new SVGGraph(800, 500, array (
 			'marker_size' => 0,
@@ -41,15 +44,27 @@ class EswikiGraph extends Task {
 		file_put_contents('eswiki.svg',$graph->Fetch('MultiLineGraph'));
 		#$wolfbot->getWiki('en.wikipedia.org')->upload('Enciclopedia Libre and Spanish Wikipedia article count.svg','eswiki.svg','Automated update by bot');
 	}
+<<<<<<< Updated upstream
+=======
+	
+>>>>>>> Stashed changes
 	protected function addData($week,$eswiki,$libre) {
 		$date=date("d M Y",$week*60*60*24*7);
 		$this->eswikiData[$date]=intval($eswiki);
 		$this->libreData[$date]=intval($libre);
 	}
+<<<<<<< Updated upstream
+	protected function interpolate($x,$x0,$y0,$x1,$y1) {
+		return $y0+(($y1-$y0)*(($x-$x0)/($x1-$x0)));
+	}
+}
+
+=======
 
 	protected function interpolate($x,$x0,$y0,$x1,$y1) {
 		return $y0+(($y1-$y0)*(($x-$x0)/($x1-$x0)));
 	}
 }
 
+>>>>>>> Stashed changes
 $wolfbot->runTask(new EswikiGraph);

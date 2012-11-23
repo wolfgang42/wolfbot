@@ -25,7 +25,7 @@ class WolfBot {
 		if (isset($wikis[$url])) return $wikis[$url];
 		require_once('lib/botclasses.php');
 		$wikis[$url]=new wikipedia($url); // TODO set user-agent
-		//$wikis[$url]->quiet=true;
+		$wikis[$url]->quiet=true;
 		if ($username != null && $password != null) $wikis[$url]->login($username,$password);
 		return $wikis[$url];
 	}
