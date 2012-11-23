@@ -233,9 +233,18 @@ class wikipedia {
      **/
     function getpage ($page,$revid=null,$detectEditConflict=false) {
         $append = '';
-        if ($revid!=null)
-            $append = '&rvstartid='.$revid;
-        $x = $this->query('?action=query&format=php&prop=revisions&titles='.urlencode($page).'&rvlimit=1&rvprop=content|timestamp'.$append);
+        if ($revid!=null) $append = '&rvstartid='.$revid;
+        $try=true;
+		while ($try) {
+			$x = $this->query('?action=query&format=php&prop=revisions&titles='.urlencode($page).'&rvlimit=1&rvprop=content|timestamp'.$append);
+			if ($x == false) {
+				echo "Error, retrying";
+				sleep(5); // In case something goes wrong, don't deluge wikipedia's servers
+				echo "...\n";
+			} else {
+				$try=false;
+			}
+    	}
         foreach ($x['query']['pages'] as $ret) {
             if (isset($ret['revisions'][0]['*'])) {
                 if ($detectEditConflict)
